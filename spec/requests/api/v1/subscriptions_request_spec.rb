@@ -11,7 +11,7 @@ describe "Subscriptions API" do
     get "/api/v1/customers/#{gauri.id}/subscriptions"
 
     subs = JSON.parse(response.body, symbolize_names: true)[:data]
-    # require 'pry'; binding.pry 
+    
     expect(response).to be_successful
     expect(subs.count).to eq(2)
     expect(subs).to be_a(Array)
