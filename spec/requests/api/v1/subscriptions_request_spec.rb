@@ -47,7 +47,6 @@ describe "Subscriptions API" do
       headers = { "CONTENT_TYPE" => "application/json", "Accept" => "application/json"}
 
       post "/api/v1/subscriptions", headers: headers, params: JSON.generate(result)
-      # require 'pry'; binding.pry 
       expect(response).to be_successful
       expect(response.status).to eq(201)
       expect(result).to be_a(Hash)

@@ -5,7 +5,7 @@ class Api::V1::SubscriptionsController < ApplicationController
   end
 
   def create 
-    sub = Subscription.new(sub_params)
+    sub = Subscription.create(sub_params)
     # if sub.save
     if Customer.exists?(params[:customer_id]) && Tea.exists?(params[:tea_id])
       # if Customer.find(params[:customer_id]) && Tea.find(params[:tea_id])
