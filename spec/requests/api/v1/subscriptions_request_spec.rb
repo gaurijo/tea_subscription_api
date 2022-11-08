@@ -9,7 +9,7 @@ describe "Subscriptions API" do
     sub2 = Subscription.create(title: "Energizer", price: 20.10, status: "active", frequency: "monthly", customer_id: gauri.id, tea_id: green.id)
 
     get "/api/v1/customers/#{gauri.id}/subscriptions"
-
+    # require 'pry'; binding.pry 
     subs = JSON.parse(response.body, symbolize_names: true)[:data]
     
     expect(response).to be_successful
@@ -20,11 +20,13 @@ describe "Subscriptions API" do
       # require 'pry'; binding.pry 
       expect(sub).to have_key(:id)
       expect(sub[:id]).to be_a(String)
+      expect(sub[:type]).to eq("subscription")
       expect(sub).to have_key(:attributes)
       expect(sub[:attributes]).to be_a(Hash)
       expect(sub[:attributes]).to include(:title)
       expect(sub[:attributes]).to include(:price)
       expect(sub[:attributes]).to include(:status)
+      expect(sub[:attributes][:status]).to be_a(String)
       expect(sub[:attributes]).to include(:frequency)
       expect(sub[:attributes]).to include(:customer_id)
       expect(sub[:attributes]).to include(:tea_id)
