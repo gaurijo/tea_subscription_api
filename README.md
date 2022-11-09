@@ -8,6 +8,8 @@ This is a Rails API for a Tea Subscription Service that has built several endpoi
 [<img src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=Postman&logoColor=white"/>](https://www.postman.com/product/what-is-postman/)<br>
 ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
 ## :tea: Database Schema:
+This database was designed with the intention of Teas and Customers being linked via a Subscription joins table. Customers are able to subscribe or cancel a tea subscription, without any effect on the Tea database. Subscriptions can be updated to be canceled without having to permanently remove the Subscription from the database. The business logic here would allow a Customer to easily activate their subscription at a later point. 
+
 [![Screen-Shot-2022-11-09-at-1-03-55-PM.png](https://i.postimg.cc/7ZBf7R54/Screen-Shot-2022-11-09-at-1-03-55-PM.png)](https://postimg.cc/NKHsvp8C)
 
 ## :tea: API Endpoints:
