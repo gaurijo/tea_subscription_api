@@ -83,17 +83,19 @@ describe "Subscriptions API" do
     expect(response.status).to eq(404)
   end
 
-  it "can delete a customer's subscription" do 
+  it "can cancel a customer's subscription" do 
     gauri = Customer.create(first_name: "Gauri", last_name: "Jo", email: "gauri@gmail.com", address: "123 Test Ave, Denver, CO 12121")
     lavender = Tea.create(title: "Lavender Haze", description: "Drift off into dreamland", temp: 123, brew_time: "3 min")
     sub1 = Subscription.create(title: "Stress Buster", price: 15.25, status: "active", frequency: "monthly", customer_id: gauri.id, tea_id: lavender.id)
 
-    sub_params = { id: sub1.id, status: "canceled" }
-    headers = { "CONTENT_TYPE" => "application/json" }
+    expect(sub1[:status]).to eq("active")
 
-    patch "/api/v1/customers/#{gauri.id}/subscriptions", headers: headers, params: JSON.generate(subscription: sub_params)
-    subscription = Subscription.find_by(id: sub1.id)
+    patch "/api/v1/subscriptions/remove", params: { id: sub1.id, status: "canceled"}
+
+    updated_sub = JSON.parse(response.body, symbolize_names: true)[:data]
 
     expect(response).to be_successful
+    expect(updated_sub).to be_a(Hash)
+    expect(updated_sub[:attributes][:status]).to eq("canceled")
   end
 end
