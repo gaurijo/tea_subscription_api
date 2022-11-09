@@ -6,7 +6,6 @@ class Api::V1::SubscriptionsController < ApplicationController
 
   def create 
     sub1 = Subscription.create(sub_params)
-    require 'pry'; binding.pry 
     # if sub.save
     if Customer.exists?(params[:customer_id]) && Tea.exists?(params[:tea_id])
       # if Customer.find(params[:customer_id]) && Tea.find(params[:tea_id])
@@ -17,6 +16,12 @@ class Api::V1::SubscriptionsController < ApplicationController
   end
 
   def update 
+    subscription = Subscription.find(params[:id])
+    if subscription.update(sub_params)
+      render json: SubscriptionSerializer.new(subscription)
+    else
+      render status: 404
+    end
   end
 
 private 
