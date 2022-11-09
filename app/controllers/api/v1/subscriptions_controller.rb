@@ -14,7 +14,6 @@ class Api::V1::SubscriptionsController < ApplicationController
   end
 
   def update 
-    # subscription = Subscription.find(params[:id])
     if Subscription.exists?(params[:id])
       subscription = Subscription.find(params[:id])
       subscription.update(sub_params)
