@@ -36,7 +36,6 @@ describe "Subscriptions API" do
   it "can create or subscribe a customer to a subscription" do 
     gauri = Customer.create(first_name: "Gauri", last_name: "Jo", email: "gauri@gmail.com", address: "123 Test Ave, Denver, CO 12121")
     maroon = Tea.create(title: "Maroon Hibiscus", description: "Floral and relaxing", temp: 123, brew_time: "3 min")
-    # new_sub = Subscription.create(title: "Sleepy Time", price: 10.15, status: "active", frequency: "weekly", customer_id: gauri.id, tea_id: maroon.id)
     result = {title: "Sleepy Time", 
               price: 10.15, 
               status: "active", 
@@ -47,8 +46,10 @@ describe "Subscriptions API" do
     headers = { "CONTENT_TYPE" => "application/json", "Accept" => "application/json"}
 
     post "/api/v1/subscriptions", headers: headers, params: JSON.generate(result)
+
     expect(response).to be_successful
     expect(response.status).to eq(201)
+
     expect(result).to be_a(Hash)
     expect(result).to have_key(:title)
     expect(result).to have_key(:price)
@@ -78,7 +79,7 @@ describe "Subscriptions API" do
     headers = { "CONTENT_TYPE" => "application/json", "Accept" => "application/json"}
 
     post "/api/v1/subscriptions", headers: headers, params: JSON.generate(bad_result)
-
+    # require 'pry'; binding.pry 
     expect(response).to_not be_successful 
     expect(response.status).to eq(404)
   end
@@ -97,5 +98,18 @@ describe "Subscriptions API" do
     expect(response).to be_successful
     expect(updated_sub).to be_a(Hash)
     expect(updated_sub[:attributes][:status]).to eq("canceled")
+  end
+
+  # Add a sad path test here
+  it "renders a status 404 error if bad data is passed through for canceling a subscription" do 
+    gauri = Customer.create(first_name: "Gauri", last_name: "Jo", email: "gauri@gmail.com", address: "123 Test Ave, Denver, CO 12121")
+    lavender = Tea.create(title: "Lavender Haze", description: "Drift off into dreamland", temp: 123, brew_time: "3 min")
+    maroon = Tea.create(title: "Maroon Hibiscus", description: "Floral and relaxing", temp: 123, brew_time: "3 min")
+
+    sub1 = Subscription.create(title: "Stress Buster", price: 15.25, status: "active", frequency: "monthly", customer_id: gauri.id, tea_id: lavender.id)
+    patch "/api/v1/subscriptions/remove", params: { id: 2, status: "canceled" }
+
+    expect(response).to_not be_successful
+    expect(response.status).to eq(404)
   end
 end
