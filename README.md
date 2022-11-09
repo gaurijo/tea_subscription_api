@@ -32,5 +32,5 @@ UPDATE(cancel) SUBSCRIPTION for a single CUSTOMER: <br>
 3. Set up database: `rails db:{drop,create,migrate,seed}`
 6. Run test suite: `bundle exec rspec`
 7. Start up your local server: `rails s`
-8. Visit the endpoints in your browser or Postman <br>
-`http://localhost:3000/api/v1/customers/{{customer_id}}/subscriptions` <br> `http://localhost:3000/api/v1/subscriptions` <br> `http://localhost:3000/api/v1/subscriptions/remove?id={{id}}`  
+8. Visit the endpoints in Postman <br>
+GET `http://localhost:3000/api/v1/customers/{{customer_id}}/subscriptions` <br> POST `http://localhost:3000/api/v1/subscriptions` <br> PATCH `http://localhost:3000/api/v1/subscriptions/remove?id={{id}}`  
