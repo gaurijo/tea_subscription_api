@@ -16,15 +16,67 @@ This database was designed with the intention of Teas and Customers being linked
 All SUBSCRIPTIONS for a single CUSTOMER: 
 <br>
 <br>
+``GET`` ``/api/v1/customers/$id/subscriptions ``
+```ruby
+  "data": [
+      { 
+          "id": "1",
+          "type": "subscription"
+          "attributes": { 
+                  "title": "Stress Buster", 
+                  "price": 15.25, 
+                  "status": "active", 
+                  "frequency": "canceled", 
+                  "customer_id": 1, 
+                  "tea_id": 1 
+                  }]
+ ```
 [![Screen-Shot-2022-11-09-at-1-22-33-PM.png](https://i.postimg.cc/PrSwzJ70/Screen-Shot-2022-11-09-at-1-22-33-PM.png)](https://postimg.cc/cr8Cdx0c)
 <br><br>
 CREATE SUBSCRIPTION for a single CUSTOMER: 
 <br>
 <br>
+``POST`` ``/api/v1/subscriptions`` <br><br>
+``params`` inside JSON body: ``title, price, status, frequency, customer_id, tea_id``
+```ruby
+    {
+    "data": {
+        "id": "7",
+        "type": "subscription",
+        "attributes": {
+            "title": "Sleepy Time",
+            "price": 10.15,
+            "status": "active",
+            "frequency": "weekly",
+            "customer_id": 1,
+            "tea_id": 1
+        }
+    }
+}
+```
 [![Screen-Shot-2022-11-09-at-1-24-25-PM.png](https://i.postimg.cc/6589gQ3k/Screen-Shot-2022-11-09-at-1-24-25-PM.png)](https://postimg.cc/qzdVC42w)
 <br><br>
 UPDATE(cancel) SUBSCRIPTION for a single CUSTOMER: <br>
 <br>
+``PATCH`` ``/api/v1/subscriptions/remove?$id``<br><br>
+``params`` ``{ $id, "status": "canceled" }``
+```ruby
+{
+    "data": {
+        "id": "6",
+        "type": "subscription",
+        "attributes": {
+            "title": "Sleepy Time",
+            "price": 10.15,
+            "status": "canceled",
+            "frequency": "weekly",
+            "customer_id": 1,
+            "tea_id": 1
+        }
+    }
+}
+```
+
 [![Screen-Shot-2022-11-09-at-1-25-42-PM.png](https://i.postimg.cc/d3zgzwNF/Screen-Shot-2022-11-09-at-1-25-42-PM.png)](https://postimg.cc/n9GdmbtS)<br>
 
 ## :tea: Local Setup
