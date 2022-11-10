@@ -13,7 +13,7 @@ This database was designed with the intention of Teas and Customers being linked
 [![Screen-Shot-2022-11-09-at-1-03-55-PM.png](https://i.postimg.cc/7ZBf7R54/Screen-Shot-2022-11-09-at-1-03-55-PM.png)](https://postimg.cc/NKHsvp8C)
 
 ## :tea: API Endpoints:
-All SUBSCRIPTIONS for a single CUSTOMER: 
+All SUBSCRIPTIONS for a single CUSTOMER (active AND canceled): 
 <br>
 <br>
 ``GET`` ``/api/v1/customers/$id/subscriptions ``
@@ -29,7 +29,19 @@ All SUBSCRIPTIONS for a single CUSTOMER:
                   "frequency": "canceled", 
                   "customer_id": 1, 
                   "tea_id": 1 
-                  }]
+                  }, 
+                      {
+            "id": "5",
+            "type": "subscription",
+            "attributes": {
+                "title": "Sleepy Time",
+                "price": 10.15,
+                "status": "active",
+                "frequency": "weekly",
+                "customer_id": 1,
+                "tea_id": 1
+            }
+        }]
  ```
 [![Screen-Shot-2022-11-09-at-1-22-33-PM.png](https://i.postimg.cc/PrSwzJ70/Screen-Shot-2022-11-09-at-1-22-33-PM.png)](https://postimg.cc/cr8Cdx0c)
 <br><br>
