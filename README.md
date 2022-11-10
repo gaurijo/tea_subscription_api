@@ -1,4 +1,4 @@
-# README
+# README - Tea Subscription API
 
 ## Overview
 This is a Rails API for a Tea Subscription Service that has built several endpoints for Customers and their Tea Subscriptions.
